@@ -8,7 +8,7 @@ const init = async () => {
 
     const server = Hapi.server({
         port: 3000,
-        host: 'localhost'
+        host: '192.168.0.105'
     });
 
     server.route({
@@ -76,8 +76,8 @@ const init = async () => {
                 const { taskid } = request.params
                 config.dbConnection()
 
-                console.log('Morreu')
                 await Task.deleteOne({_id: taskid})
+                console.log('Morreu')
                 return {statusCode: 204}
             }
             catch(e){

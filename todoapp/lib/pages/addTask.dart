@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todoapp/http/operations.dart';
 
+final TextEditingController _date = TextEditingController();
 DateTime dateTime;
-TextEditingController _date = TextEditingController();
 
 class AddTask extends StatelessWidget with ChangeNotifier {
   final TextEditingController _categoryController = TextEditingController();
 
   final TextEditingController _nameController = TextEditingController();
 
-  TextEditingController _date = TextEditingController();
   final Operations operations = new Operations();
 
   @override
@@ -50,7 +49,7 @@ class AddTask extends StatelessWidget with ChangeNotifier {
               onPressed: () {
                 final String name = _nameController.text.toString();
                 final String category = _categoryController.text.toString();
-                final String date = _date.text.toString();
+                final String date = _date.text;
                 showDialog(
                   context: context,
                   builder: (contextDialog) {
@@ -68,11 +67,14 @@ class AddTask extends StatelessWidget with ChangeNotifier {
                             TextButton(
                               child: Text('Sim'),
                               onPressed: () {
+                                print(
+                                    '\n\n AQUI CARALHO   ---->>>>  ${_date.text} <<<<-----\n\n');
+                                print(
+                                    '\n\n AQUI CARALHO   ---->>>>  ${date} <<<<-----\n\n');
                                 operations.post(name, category, date);
                                 Navigator.pop(context);
                                 Navigator.pop(context);
                                 pqp.adiciona(1);
-                                notifyListeners();
                               },
                             ),
                           ],
@@ -113,6 +115,8 @@ class _FuncionaPorraState extends State<FuncionaPorra> {
                 lastDate: DateTime(2035),
               ).then((data) => setState(() {
                     dateTime = data;
+                    return _date.text =
+                        DateFormat('yyyy-MM-dd').format(dateTime).toString();
                   }));
             }),
       ],

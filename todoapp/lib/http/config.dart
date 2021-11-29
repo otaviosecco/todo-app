@@ -7,7 +7,7 @@ final Client client = HttpClientWithInterceptor.build(
   interceptors: [LoggingInterceptor()],
 );
 
-const String baseUrl = 'http://localhost:3000';
+const String baseUrl = 'http://192.168.0.105:3000';
 
 class LoggingInterceptor implements InterceptorContract {
   @override
