@@ -49,7 +49,6 @@ class AddTask extends StatelessWidget with ChangeNotifier {
               onPressed: () {
                 final String name = _nameController.text.toString();
                 final String category = _categoryController.text.toString();
-                final String date = _date.text;
                 showDialog(
                   context: context,
                   builder: (contextDialog) {
@@ -67,11 +66,7 @@ class AddTask extends StatelessWidget with ChangeNotifier {
                             TextButton(
                               child: Text('Sim'),
                               onPressed: () {
-                                print(
-                                    '\n\n AQUI CARALHO   ---->>>>  ${_date.text} <<<<-----\n\n');
-                                print(
-                                    '\n\n AQUI CARALHO   ---->>>>  ${date} <<<<-----\n\n');
-                                operations.post(name, category, date);
+                                operations.post(name, category, _date.text);
                                 Navigator.pop(context);
                                 Navigator.pop(context);
                                 pqp.adiciona(1);

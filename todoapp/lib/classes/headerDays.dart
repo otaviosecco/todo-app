@@ -15,15 +15,21 @@ class HeaderDays extends StatelessWidget {
           child: Row(
             children: [
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  //buildBody(diaAtual)
+                },
                 child: Text('Today', style: TextStyle(color: Colors.white)),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  //buildBody(Amanha)
+                },
                 child: Text('Tomorrow', style: TextStyle(color: Colors.white)),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  //else
+                },
                 child: Text('Later', style: TextStyle(color: Colors.white)),
               ),
             ],

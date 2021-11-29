@@ -17,6 +17,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: AppBar(
           title: TabBar(
+            indicatorColor: Colors.yellow,
             tabs: [
               Tab(
                 text: 'Tasks',
