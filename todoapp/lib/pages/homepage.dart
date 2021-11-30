@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/classes/BuildBody.dart';
 import 'package:todoapp/classes/headerDays.dart';
+import 'package:todoapp/pages/addTask.dart';
 
 import '../classes/addTaskButton.dart';
 
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 HeaderDays(),
-                BuildBody(),
+                bodyBuilder(context, DateTime.now()),
                 AddTaskButton(context: context),
               ],
             ),
