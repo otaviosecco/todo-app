@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'config.dart';
 import 'package:http/http.dart';
@@ -12,15 +13,13 @@ class PutaQuePariu extends ChangeNotifier {
 
   void adiciona(pffunciona) {
     pffunciona += 1;
-    print('Deu boa counter -> $pffunciona');
-    print('Não faça isso, não me de esperança');
     notifyListeners();
   }
 }
 
 class Operations extends ChangeNotifier {
-  Future<List<Task>> request() async {
-    final Response response = await client.get(baseUrl);
+  Future<List<Task>> request(date) async {
+    final Response response = await client.get('$baseUrl?date=$date');
 
     final List<dynamic> decodedJson = jsonDecode(response.body);
     print('Printou no request');

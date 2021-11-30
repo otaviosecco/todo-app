@@ -101,7 +101,7 @@ class _FuncionaPorraState extends State<FuncionaPorra> {
         RaisedButton(
             child: Text(dateTime == null
                 ? 'Noithing has been picked yet'
-                : dateTime.toString()),
+                : DateFormat('yyyy-MM-dd').format(dateTime).toString()),
             onPressed: () {
               showDatePicker(
                 context: context,

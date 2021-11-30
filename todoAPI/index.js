@@ -3,12 +3,13 @@
 const Hapi = require('@hapi/hapi');
 const config = require('./config')
 const Task = require('./task')
+const { DateTime } = require("luxon");
 
 const init = async () => {
 
     const server = Hapi.server({
         port: 3000,
-        host: '192.168.0.105'
+        host: '192.168.0.103'
     });
 
     server.route({
@@ -18,6 +19,7 @@ const init = async () => {
             try {
                 config.dbConnection()
                 const payload = request.payload
+                payload.date = DateTime.fromISO(payload.date).plus({hours: 3})
                 console.log(payload, payload.name)
                 await Task(payload).save()
 
@@ -33,9 +35,17 @@ const init = async () => {
         handler: async (request, h) => {
             try {
                 config.dbConnection()
-
+                const query = request.query
+                console.log(query.date)
                 console.log('Teve um GET hein PORRA')
-                const tasks = await Task.find({})
+                console.log(DateTime.fromISO(query.date).startOf('day').toISO())
+                console.log(DateTime.fromISO(query.date).endOf('day').toISO())
+
+                const tasks = await Task.find({date:
+                    {$gte: new Date(DateTime.fromISO(query.date).startOf('day').toISO()),
+                      $lt:  new Date(DateTime.fromISO(query.date).endOf('day').toISO())
+                   }
+                })
                 // const tasks = {}
                 console.log(tasks)
                 return tasks

@@ -5,6 +5,10 @@ import 'package:todoapp/http/operations.dart';
 import 'emptyList.dart';
 import 'package:intl/intl.dart';
 
+Widget bodyBuilder(DateTime date) {
+  Operations operations = new Operations();
+}
+
 class BuildBody extends StatelessWidget with ChangeNotifier {
   Operations operations = new Operations();
   @override
@@ -13,7 +17,8 @@ class BuildBody extends StatelessWidget with ChangeNotifier {
       return Expanded(
         child: FutureBuilder<List<Task>>(
           initialData: List(),
-          future: operations.request(),
+          future: operations.request(DateTime.now().toIso8601String()),
+          // future: operations.request(DateTime.now().toIso8601String()),
           builder: (context, snapshot) {
             if (snapshot.data.isEmpty) {
               return EmptyList();

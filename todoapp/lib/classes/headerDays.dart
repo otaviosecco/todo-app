@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
 class HeaderDays extends StatelessWidget {
-  const HeaderDays({
-    Key key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -15,22 +11,23 @@ class HeaderDays extends StatelessWidget {
           child: Row(
             children: [
               TextButton(
+                child: Text('Today', style: TextStyle(color: Colors.white)),
                 onPressed: () {
+                  print('APERTOU AA');
                   //buildBody(diaAtual)
                 },
-                child: Text('Today', style: TextStyle(color: Colors.white)),
               ),
               TextButton(
+                child: Text('Tomorrow', style: TextStyle(color: Colors.white)),
                 onPressed: () {
                   //buildBody(Amanha)
                 },
-                child: Text('Tomorrow', style: TextStyle(color: Colors.white)),
               ),
               TextButton(
+                child: Text('Later', style: TextStyle(color: Colors.white)),
                 onPressed: () {
                   //else
                 },
-                child: Text('Later', style: TextStyle(color: Colors.white)),
               ),
             ],
           ),
