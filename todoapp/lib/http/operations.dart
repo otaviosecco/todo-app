@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import 'config.dart';
 import 'package:http/http.dart';
@@ -18,15 +17,20 @@ class PutaQuePariu extends ChangeNotifier {
 }
 
 class Operations extends ChangeNotifier {
-  Future<List<Task>> request(date) async {
-    final Response response = await client.get('$baseUrl?date=$date');
+  Future<List<Task>> request(date, filter) async {
+    try {
+      final Response response =
+          await client.get('$baseUrl?date=$date&filter=$filter');
+      final List<dynamic> decodedJson = jsonDecode(response.body);
 
-    final List<dynamic> decodedJson = jsonDecode(response.body);
-    print('Printou no request');
-    print(decodedJson.map((dynamic json) => Task.fromJson(json)).toList());
-    final resposta =
-        decodedJson.map((dynamic json) => Task.fromJson(json)).toList();
-    return resposta;
+      print(decodedJson.map((dynamic json) => Task.fromJson(json)).toList());
+      final resposta =
+          decodedJson.map((dynamic json) => Task.fromJson(json)).toList();
+      return resposta;
+    } catch (e) {
+      print(e);
+      return null;
+    }
   }
 
   void update(id, boleia) async {

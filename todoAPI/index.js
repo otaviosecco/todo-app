@@ -19,6 +19,7 @@ const init = async () => {
             try {
                 config.dbConnection()
                 const payload = request.payload
+
                 payload.date = DateTime.fromISO(payload.date).plus({hours: 3})
                 console.log(payload, payload.name)
                 await Task(payload).save()
@@ -35,19 +36,18 @@ const init = async () => {
         handler: async (request, h) => {
             try {
                 config.dbConnection()
-                const query = request.query
-                console.log(query.date)
-                console.log('Teve um GET hein PORRA')
-                console.log(DateTime.fromISO(query.date).startOf('day').toISO())
-                console.log(DateTime.fromISO(query.date).endOf('day').toISO())
+                const {date, filter} = request.query
 
-                const tasks = await Task.find({date:
-                    {$gte: new Date(DateTime.fromISO(query.date).startOf('day').toISO()),
-                      $lt:  new Date(DateTime.fromISO(query.date).endOf('day').toISO())
-                   }
-                })
+                const conditions = {}
+                conditions.date = {$gte: new Date(DateTime.fromISO(date).startOf('day').toISO())}
+                if (filter == 0){
+                    conditions.date['$lt'] = new Date(DateTime.fromISO(date).endOf('day').toISO())
+                }
+                console.log(filter)
+                console.log(conditions)
+                const tasks = await Task.find(conditions)
+
                 // const tasks = {}
-                console.log(tasks)
                 return tasks
             } catch (e) {
                 console.log('Deu merda')

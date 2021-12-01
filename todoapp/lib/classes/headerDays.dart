@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoapp/http/operations.dart';
 
+int filter = 0;
+
 class HeaderDays extends StatelessWidget with ChangeNotifier {
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,7 @@ class HeaderDays extends StatelessWidget with ChangeNotifier {
                     child: Text('Today', style: TextStyle(color: Colors.white)),
                     onPressed: () {
                       selectedDay = DateTime.now();
+                      filter = 0;
                       pqp.adiciona(1);
                     },
                   ),
@@ -26,13 +29,16 @@ class HeaderDays extends StatelessWidget with ChangeNotifier {
                         Text('Tomorrow', style: TextStyle(color: Colors.white)),
                     onPressed: () {
                       selectedDay = DateTime.now().add(Duration(days: 1));
+                      filter = 0;
                       pqp.adiciona(1);
                     },
                   ),
                   TextButton(
                     child: Text('Later', style: TextStyle(color: Colors.white)),
                     onPressed: () {
-                      //else
+                      selectedDay = DateTime.now().add(Duration(days: 2));
+                      filter = 1;
+                      pqp.adiciona(1);
                     },
                   ),
                 ],
@@ -66,6 +72,7 @@ class _CalendarState extends State<Calendar> {
                   lastDate: DateTime(2035))
               .then((day) => setState(() {
                     selectedDay = day;
+                    filter = 0;
 
                     pqp.adiciona(1);
                   }));

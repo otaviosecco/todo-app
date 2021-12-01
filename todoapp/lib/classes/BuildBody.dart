@@ -13,7 +13,7 @@ Widget bodyBuilder(BuildContext context, DateTime funciona) {
     return Expanded(
       child: FutureBuilder<List<Task>>(
         initialData: List(),
-        future: operations.request(selectedDay.toIso8601String()),
+        future: operations.request(selectedDay.toIso8601String(), filter),
         // future: operations.request(DateTime.now().toIso8601String()),
         builder: (context, snapshot) {
           if (snapshot.data.isEmpty) {
