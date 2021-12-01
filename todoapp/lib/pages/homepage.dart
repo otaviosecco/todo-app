@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/classes/BuildBody.dart';
 import 'package:todoapp/classes/headerDays.dart';
-import 'package:todoapp/pages/addTask.dart';
 
 import '../classes/addTaskButton.dart';
 
@@ -11,6 +10,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  DateTime today = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 HeaderDays(),
-                bodyBuilder(context, DateTime.now()),
+                bodyBuilder(context, today),
                 AddTaskButton(context: context),
               ],
             ),

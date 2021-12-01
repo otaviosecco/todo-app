@@ -5,13 +5,15 @@ import 'package:todoapp/http/operations.dart';
 import 'emptyList.dart';
 import 'package:intl/intl.dart';
 
-Widget bodyBuilder(BuildContext context, DateTime date) {
+import 'headerDays.dart';
+
+Widget bodyBuilder(BuildContext context, DateTime funciona) {
   Operations operations = new Operations();
   return Consumer<PutaQuePariu>(builder: (context, pqp, child) {
     return Expanded(
       child: FutureBuilder<List<Task>>(
         initialData: List(),
-        future: operations.request(DateTime.now().toIso8601String()),
+        future: operations.request(selectedDay.toIso8601String()),
         // future: operations.request(DateTime.now().toIso8601String()),
         builder: (context, snapshot) {
           if (snapshot.data.isEmpty) {
