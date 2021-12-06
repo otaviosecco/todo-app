@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todoapp/http/operations.dart';
 
 int filter = 0;
+DateTime selectedDay = DateTime.now();
 
 class HeaderDays extends StatelessWidget with ChangeNotifier {
   @override
@@ -81,5 +82,3 @@ class _CalendarState extends State<Calendar> {
     });
   }
 }
-
-DateTime selectedDay = DateTime.now();

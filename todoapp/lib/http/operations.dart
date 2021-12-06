@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'config.dart';
@@ -27,9 +28,8 @@ class Operations extends ChangeNotifier {
       final resposta =
           decodedJson.map((dynamic json) => Task.fromJson(json)).toList();
       return resposta;
-    } catch (e) {
-      print(e);
-      return null;
+    } on SocketException {
+      return List();
     }
   }
 
