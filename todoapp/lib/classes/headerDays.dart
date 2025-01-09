@@ -72,7 +72,7 @@ class _CalendarState extends State<Calendar> {
                   firstDate: DateTime(2021),
                   lastDate: DateTime(2035))
               .then((day) => setState(() {
-                    selectedDay = day;
+                    selectedDay = day!;
                     filter = 0;
 
                     pqp.adiciona(1);

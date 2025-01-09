@@ -21,7 +21,7 @@ class Operations extends ChangeNotifier {
   Future<List<Task>> request(date, filter) async {
     try {
       final Response response =
-          await client.get('$baseUrl?date=$date&filter=$filter');
+          await client.get('$baseUrl?date=$date&filter=$filter' as Uri);
       final List<dynamic> decodedJson = jsonDecode(response.body);
 
       print(decodedJson.map((dynamic json) => Task.fromJson(json)).toList());
@@ -29,24 +29,24 @@ class Operations extends ChangeNotifier {
           decodedJson.map((dynamic json) => Task.fromJson(json)).toList();
       return resposta;
     } on SocketException {
-      return List();
+      return <Task>[];
     }
   }
 
   void update(id, boleia) async {
     boleia = boleia.toString();
-    await client.put('$baseUrl/$id', body: {'completed': boleia});
+    await client.put('$baseUrl/$id' as Uri, body: {'completed': boleia});
   }
 
   void delete(id) async {
-    await client.delete('$baseUrl/$id');
+    await client.delete('$baseUrl/$id' as Uri);
     notifyListeners();
     print('$id' ' Ripado');
   }
 
   void post(name, category, date) async {
     await client.post(
-      baseUrl,
+      baseUrl as Uri,
       body: {
         'name': name.toString(),
         'date': date.toString(),

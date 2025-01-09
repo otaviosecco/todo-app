@@ -4,8 +4,8 @@ import '../pages/addTask.dart';
 
 class AddTaskButton extends StatelessWidget {
   const AddTaskButton({
-    Key key,
-    @required this.context,
+    Key? key,
+    required this.context,
   }) : super(key: key);
 
   final BuildContext context;

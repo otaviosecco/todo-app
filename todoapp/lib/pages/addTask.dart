@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:todoapp/http/operations.dart';
 
 final TextEditingController _date = TextEditingController();
-DateTime dateTime;
+DateTime dateTime = DateTime.now();
 
 class AddTask extends StatelessWidget with ChangeNotifier {
   final TextEditingController _categoryController = TextEditingController();
@@ -98,9 +98,9 @@ class _FuncionaPorraState extends State<FuncionaPorra> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        RaisedButton(
+        ElevatedButton(
             child: Text(dateTime == null
-                ? 'Noithing has been picked yet'
+                ? 'Nothing has been picked yet'
                 : DateFormat('yyyy-MM-dd').format(dateTime).toString()),
             onPressed: () {
               showDatePicker(
@@ -109,9 +109,8 @@ class _FuncionaPorraState extends State<FuncionaPorra> {
                 firstDate: DateTime(2021),
                 lastDate: DateTime(2035),
               ).then((data) => setState(() {
-                    dateTime = data;
-                    return _date.text =
-                        DateFormat('yyyy-MM-dd').format(dateTime).toString();
+                    dateTime = data!;
+                    _date.text = DateFormat('yyyy-MM-dd').format(dateTime).toString();
                   }));
             }),
       ],

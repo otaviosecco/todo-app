@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 HeaderDays(),
                 bodyBuilder(context, today),
-                AddTaskButton(context: context),
+                AddTaskButton(context: context,),
               ],
             ),
             Center(),

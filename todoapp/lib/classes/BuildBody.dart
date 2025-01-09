@@ -15,49 +15,47 @@ Widget bodyBuilder(BuildContext context, DateTime funciona) {
     builder: (context, pqp, child) {
       return Expanded(
         child: FutureBuilder<List<Task>>(
-          initialData: List(),
+          initialData: <Task>[],
           future: operations.request(selectedDay.toIso8601String(), filter),
           // future: operations.request(DateTime.now().toIso8601String()),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
                 return Text('Deu merda irmão');
-                break;
               case ConnectionState.waiting:
                 return Progress();
-                break;
               case ConnectionState.active:
                 break;
               case ConnectionState.done:
-                if (snapshot.data.isEmpty) {
+                if (snapshot.data!.isEmpty) {
                   return EmptyList();
                 } else {
-                  final List<Task> task = snapshot.data;
+                  final List<Task>? task = snapshot.data;
                   return ListView.builder(
-                    itemCount: task.length,
+                    itemCount: task?.length,
                     itemBuilder: (context, index) {
                       return Card(
                         child: ListTile(
                           leading: IconButton(
-                            color: task[index].completed
+                            color: task![index].completed
                                 ? Colors.yellow
                                 : Colors.black,
                             icon: Icon(Icons.star),
                             onPressed: () {
                               operations.update(
-                                  task[index].id, !task[index].completed);
+                                  task?[index].id, !task![index].completed);
                               pqp.adiciona(1);
                             },
                           ),
                           trailing: IconButton(
                             icon: Icon(Icons.delete),
                             onPressed: () {
-                              operations.delete(task[index].id);
+                              operations.delete(task![index].id);
                               pqp.adiciona(1);
                             },
                           ),
                           title: Text(
-                            task[index].category.toString(),
+                            task![index].category.toString(),
                             style: TextStyle(
                               fontSize: 24.0,
                               fontWeight: FontWeight.bold,
@@ -76,10 +74,13 @@ Widget bodyBuilder(BuildContext context, DateTime funciona) {
                     },
                   );
                 }
+                default:
+                  return SizedBox.shrink();
+              }
+              return SizedBox.shrink(); // Ensure a Widget is always returned
             }
-          },
-        ),
-      );
-    },
-  );
+          )
+        );
+      }
+    );
 }
