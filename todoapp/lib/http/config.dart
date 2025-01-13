@@ -6,7 +6,7 @@ final Client client = InterceptedClient.build(
   interceptors: [LoggingInterceptor()],
 );
 
-const String baseUrl = 'http://192.168.0.103:3000';
+const String baseUrl = 'http://192.168.1.53:3000';
 
 class LoggingInterceptor implements InterceptorContract {
   @override
@@ -27,13 +27,11 @@ class LoggingInterceptor implements InterceptorContract {
   
   @override
   FutureOr<bool> shouldInterceptRequest() {
-    // TODO: implement shouldInterceptRequest
-    throw UnimplementedError();
+    return true;
   }
   
   @override
   FutureOr<bool> shouldInterceptResponse() {
-    // TODO: implement shouldInterceptResponse
-    throw UnimplementedError();
+    return true;
   }
 }

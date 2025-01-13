@@ -27,7 +27,7 @@ Widget bodyBuilder(BuildContext context, DateTime funciona) {
               case ConnectionState.active:
                 break;
               case ConnectionState.done:
-                if (snapshot.data!.isEmpty) {
+                if (snapshot.data == null || snapshot.data!.isEmpty) {
                   return EmptyList();
                 } else {
                   final List<Task>? task = snapshot.data;

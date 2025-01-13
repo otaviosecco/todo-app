@@ -2,17 +2,20 @@
 
 const mongoose = require('mongoose');
 
-let conn = null
-async function dbConnection () {
-    if (conn === null) {
-      const database = await mongoose.connect('mongodb+srv://adm:adm@cluster0.hvdaa.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
-        useUnifiedTopology: true,
-        useNewUrlParser: true
-      })
-      conn = database.connections[0].readyState
+const dbConnection = async () => {
+    try {
+        await mongoose.connect('mongodb+srv://user:u0mjOdo927D4eluV@cluster0.nw1ci.mongodb.net/?retryWrites=true&w=majority&appName=Cluster', {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            // outras opções de configuração
+        });
+        console.log('Database connected');
+    } catch (error) {
+        console.error('Database connection error:', error);
     }
-  }
+};
 
-module.exports = {
-  dbConnection
-}
+module.exports = { dbConnection };
+
+//user
+//u0mjOdo927D4eluV
